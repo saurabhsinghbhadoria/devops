@@ -12,5 +12,7 @@ scalling policy like cpu network memory percentage how many instance will launch
 Azure desaster recovery:-
 service called "recovery service vault"
  
+ 
+ Service endpoint & private endpoint:------------- 
 
 
