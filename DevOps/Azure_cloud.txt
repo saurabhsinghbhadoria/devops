@@ -3,6 +3,12 @@ VM Auto Scaling :-------------------------------------
 Need to create (Vatrual machine scal set).
 
 AWS auto scaling:-------------------------------------
+ec2 instance > launch configuration > choose AMI > Choose instance type > configuration details > Add users > config Sec Group > create launch configuration
+latest way to do that
+launch template > provide versioning in template
+autoscaling group: > 
 
-ec2 instance taunch configuration an launch template
+scalling policy like cpu network memory percentage how many instance will launch
+ 
+
 
