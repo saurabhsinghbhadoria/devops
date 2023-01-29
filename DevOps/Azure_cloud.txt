@@ -14,8 +14,8 @@ service called "recovery service vault"
  
  
  Service endpoint & private endpoint:------------- 
- Private endpoint :- make connection to specific resources using private IP.
- Service endpoint:- make connections to the service of azure will use Public IP as a 
+ Private endpoint :- make connection to specific resources using private IP. inrta sebnet NSG will not have any issue
+ Service endpoint:- make connections to the service of azure will use Public IP. enable communication to all the resource with in a service . NSG will impect. 
  
  NSG:--------can be apply on vnet and directoly to VMs.
 
