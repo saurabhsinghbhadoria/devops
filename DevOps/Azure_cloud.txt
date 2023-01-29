@@ -25,7 +25,8 @@ vnet peering:-------------------------------------------------------------------
 allow the traffic from two vnet whith in a same reason; under vnet setting can create vnet peering. IP range should not be overlapping.
 
 Storage account access securly:--------------------------------------------------------
-Acess key:- 
+Acess key:-(unrestrected access) key1 key2 in case of key1 compromise we can reset the key1 till the time can use key2 
+shared access signature:-- (provide restructure access) provide access to specific container and restrict the action as well.
 
 
 
