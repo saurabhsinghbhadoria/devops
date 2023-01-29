@@ -7,8 +7,10 @@ ec2 instance > launch configuration > choose AMI > Choose instance type > config
 latest way to do that
 launch template > provide versioning in template
 autoscaling group: > 
-
 scalling policy like cpu network memory percentage how many instance will launch
+
+Azure desaster recovery:-
+service called "recovery service vault"
  
 
 
