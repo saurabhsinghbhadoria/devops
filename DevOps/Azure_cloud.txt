@@ -1,0 +1,8 @@
+VM Auto Scaling :-------------------------------------
+
+Need to create (Vatrual machine scal set).
+
+AWS auto scaling:-------------------------------------
+
+ec2 instance taunch configuration an launch template
+
