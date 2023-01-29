@@ -14,5 +14,8 @@ service called "recovery service vault"
  
  
  Service endpoint & private endpoint:------------- 
+ 
+ 
+ NSG:--------can be apply on vnet and directoly to VMs.
 
 
