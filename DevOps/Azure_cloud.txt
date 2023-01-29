@@ -24,4 +24,8 @@ Site to side VPN:---------------------------------------------------------------
 vnet peering:-------------------------------------------------------------------------
 allow the traffic from two vnet whith in a same reason; under vnet setting can create vnet peering. IP range should not be overlapping.
 
+Storage account access securly:--------------------------------------------------------
+Acess key:- 
+
+
 
