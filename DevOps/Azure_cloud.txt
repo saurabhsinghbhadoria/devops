@@ -21,7 +21,7 @@ Express route :-----------------------------------------------------------------
 
 Site to side VPN:---------------------------------------------------------------------
 
-vnet peering:-------------------------------------------------------------------------
+vnet peering VPN gateway:-------------------------------------------------------------------------
 allow the traffic from two vnet whith in a same reason; under vnet setting can create vnet peering. IP range should not be overlapping.
 
 Storage account access securly:--------------------------------------------------------
