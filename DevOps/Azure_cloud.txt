@@ -14,7 +14,8 @@ service called "recovery service vault"
  
  
  Service endpoint & private endpoint:------------- 
- 
+ Private endpoint :- make connection to specific resources using private IP.
+ Service endpoint:- make connections to the service of azure will use Public IP as a 
  
  NSG:--------can be apply on vnet and directoly to VMs.
 
