@@ -10,11 +10,9 @@ CMD arguments can be overwritten by command line arguments, while ENTRYPOINT arg
 
 Use multi-stage builds-----------------------------------------------------------------------
 stage 1 
-
 build application
 
 stage 2
-
 build docker file
 
 best prectice docker file---------------------------------------------------------------------
