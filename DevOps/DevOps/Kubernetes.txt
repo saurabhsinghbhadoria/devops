@@ -1,0 +1,166 @@
+kubernetes component :-
+Control Plane Components (Master Noide)
+kube-apiserver:- The API server is a component of the Kubernetes control plane that exposes the Kubernetes API. The API server is the front end for the Kubernetes control plane
+etcd :- Consistent and highly-available key value store used as Kubernetes' backing store for all cluster data.
+kube-scheduler:- Control plane component that watches for newly created Pods with no assigned node, and selects a node for them to run on.
+kube-controller-manager:- 
+Node controller: Responsible for noticing and responding when nodes go down.
+Job controller: Watches for Job objects that represent one-off tasks, then creates Pods to run those tasks to completion.
+EndpointSlice controller: Populates EndpointSlice objects (to provide a link between Services and Pods).
+ServiceAccount controller: Create default ServiceAccounts for new namespaces.
+
+Node Components:- (Worker node)
+kubelet :- An agent that runs on each node in the cluster. It makes sure that containers are running in a Pod.
+kube-proxy :- kube-proxy is a network proxy that runs on each node in your cluster, implementing part of the Kubernetes Service concept.
+Container runtime :- The container runtime is the software that is responsible for running containers.
+
+Deployments:----------------------------------------------------------------------------
+kubectl apply -f https://k8s.io/examples/controllers/nginx-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 80
+
+kubectl set image deployment.v1.apps/nginx-deployment nginx=nginx:1.16.1
+kubectl edit deployment/nginx-deployment
+kubectl rollout status deployment/nginx-deployment
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+kubectl get pods
+kubectl describe deployments
+kubectl rollout history deployment/nginx-deployment
+kubectl autoscale deployment/nginx-deployment --min=10 --max=15 --cpu-percent=80
+kubectl set resources deployment/nginx-deployment -c=nginx --limits=cpu=200m,memory=512Mi
+
+
+Services:-------------------------------------------------------------------------------
+EndpointSlices:--Services most commonly abstract access to Kubernetes Pods thanks to the selector, but when used with a corresponding set of EndpointSlices objects and without a selector, the Service can abstract other kinds of backends, including ones that run outside the cluster.
+
+Headless Services :--Sometimes you don't need load-balancing and a single Service IP. In this case, you can create what are termed "headless" Services, by explicitly specifying "None" for the cluster IP (.spec.clusterIP).
+
+Kubernetes ServiceTypes allow you to specify what kind of Service you want.
+Type values and their behaviors are:
+ClusterIP: Exposes the Service on a cluster-internal IP. Choosing this value makes the Service only reachable from within the cluster. This is the default that is used if you don't explicitly specify a type for a Service.
+NodePort: Exposes the Service on each Node's IP at a static port (the NodePort). To make the node port available, Kubernetes sets up a cluster IP address, the same as if you had requested a Service of type: ClusterIP.
+LoadBalancer: Exposes the Service externally using a cloud provider's load balancer.
+ExternalName: Maps the Service to the contents of the externalName field (e.g. foo.bar.example.com), by returning a CNAME record with its value. No proxying of any kind is set up.
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-service
+spec:
+  selector:
+    app.kubernetes.io/name: MyApp
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 9376
+  clusterIP: 10.0.171.239
+  type: LoadBalancer
+status:
+  loadBalancer:
+    ingress:
+    - ip: 192.0.2.127
+
+
+Volume managment:-----------------------------------------------------------------------
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: example-pv
+spec:
+  capacity:
+    storage: 100Gi
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: local-storage
+  local:
+    path: /mnt/disks/ssd1
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - example-node
+
+persistentVolumeClaim:--------A persistentVolumeClaim volume is used to mount a PersistentVolume into a Pod.
+
+
+Health pros:----------------------------------------------------------------------------
+Protect slow starting containers with startup probes
+liveness probes:-- container is live and pod is live 
+readinessProbe:- pod is live but service not live or application not ready to take load 
+
+startupProbe:
+  httpGet:
+    path: /healthz
+    port: liveness-port
+  failureThreshold: 30
+  periodSeconds: 10
+
+   livenessProbe:
+      httpGet:
+        path: /healthz
+        port: 8080
+        httpHeaders:
+        - name: Custom-Header
+          value: Awesome
+      initialDelaySeconds: 3
+      periodSeconds: 3
+
+     readinessProbe:
+      tcpSocket:
+        port: 8080
+      initialDelaySeconds: 5
+      periodSeconds: 10
+
+initialDelaySeconds: Number of seconds after the container has started before startup, liveness or readiness probes are initiated. Defaults to 0 seconds. Minimum value is 0.
+periodSeconds: How often (in seconds) to perform the probe. Default to 10 seconds. Minimum value is 1.
+timeoutSeconds: Number of seconds after which the probe times out. Defaults to 1 second. Minimum value is 1.
+
+Autoscaling vertical horizontal configuration:------------------------------------------
+
+
+
+Namespaces:-----------------------------------------------------------------------------
+
+segrigating the resources in cluster and apply access policies and resource quata.
+
+configmap:------------------------------------------------------------------------------
+
+seting up env_variable db scring and other neccesery information in config map 
+
+secrets:--------------------------------------------------------------------------------
+
+storing the secrets that is being used by pods
+
+
+Depoyment stratergy:--------------------------------------------------------------------
+
+rolling update:- rollout deployment one by one to all the poda without any downtime -- default deployment stratergy
+
+canery :- some traffic to old version some for new version by replica set lets suppose old version 2 replica new vwesion 3 replica means 40%new vwesion 60% old version
+
+blue-green :- deployed two version of application and switch the deployment to old version to new version very quickly--- more resource required. 
+

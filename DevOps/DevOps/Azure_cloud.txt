@@ -1,0 +1,32 @@
+VM Auto Scaling :-----------------------------------------------------------------
+Need to create (Vatrual machine scal set).
+
+AWS auto scaling:------------------------------------------------------------------
+ec2 instance > launch configuration > choose AMI > Choose instance type > configuration details > Add users > config Sec Group > create launch configuration
+latest way to do that
+launch template > provide versioning in template
+autoscaling group: > 
+scalling policy like cpu network memory percentage how many instance will launch
+
+Azure desaster recovery:-----------------------------------------------------------
+service called "recovery service vault"
+ 
+Service endpoint & private endpoint:------------------------------------------------- 
+Private endpoint :- make connection to specific resources using private IP. inrta sebnet NSG will not have any issue,  no cost associated
+Service endpoint:- make connections to the service of azure will use Public IP. enable communication to all the resource with in a service . NSG will impect. 1 cent per hr associated
+ 
+NSG:--------can be apply on vnet and directoly to VMs.
+
+Express route :-----------------------------------------------------------------------
+
+Site to side VPN:---------------------------------------------------------------------
+
+vnet peering VPN gateway:-------------------------------------------------------------------------
+allow the traffic from two vnet whith in a same reason; under vnet setting can create vnet peering. IP range should not be overlapping.
+
+Storage account access securly:--------------------------------------------------------
+Acess key:-(unrestrected access) key1 key2 in case of key1 compromise we can reset the key1 till the time can use key2 
+shared access signature:-- (provide restructure access) provide access to specific container and restrict the action as well.
+
+
+
