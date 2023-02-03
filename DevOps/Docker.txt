@@ -34,3 +34,7 @@ docker pull ----- pulling the iamge from registory
 docker push  --- pushing the image registory
 docker run -----got running the image
 docker build ---for building the image
+
+yum install docker-scan-plugin:--------------------------------------------------------
+
+docker scan --file PATH_TO_DOCKERFILE DOCKER_IMAGE.
